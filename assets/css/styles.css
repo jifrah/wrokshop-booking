@@ -324,6 +324,13 @@ img {
 /*=============== BREAKPOINTS ===============*/
 /* For small devices */
 @media screen and (max-width: 768px) {
+  .swiper-button-prev {
+    left: -1rem;
+  }
+
+  .swiper-button-next {
+    right: -1rem;
+  }
   .card__container {
     max-height: calc(100vh - 60px); /* Adjust the height to avoid footer overlap */
     padding-top: 1rem;
