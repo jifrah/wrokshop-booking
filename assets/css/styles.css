@@ -230,17 +230,31 @@ img {
 }
 
 .card__description {
+  display: none; /* Hide the element by default */
   font-weight: 500;
   color: var(--second-color);
   margin-bottom: 1rem;
 }
 
+
+/* Show the description on hover or focus */
+.card__article:hover .card__description,
+.card__article:focus .card__description {
+  display: block;
+}
+
 .card__organisateur {
+  display: none; /* Hide the element by default */
   font-weight: 400;
   color: var(--second-color);
   margin-bottom: 1rem;
 }
 
+/* Show the description on hover or focus */
+.card__article:hover .card__organisateur,
+.card__article:focus .card__organisateur {
+  display: block;
+}
 
 /* Swiper class */
 .swiper-button-prev:after,
@@ -254,7 +268,7 @@ img {
   height: initial;
   font-size: 3rem;
   color: var(--second-color);
-  display: block;/
+  display: none;
 }
 
 .swiper-button-prev {
@@ -310,15 +324,6 @@ img {
 /*=============== BREAKPOINTS ===============*/
 /* For small devices */
 @media screen and (max-width: 768px) {
-
-  .swiper-button-prev {
-    left: 3rem;
-  }
-
-  .swiper-button-next {
-    right: 3rem;
-  }
-  
   .card__container {
     max-height: calc(100vh - 60px); /* Adjust the height to avoid footer overlap */
     padding-top: 1rem;
@@ -380,7 +385,10 @@ img {
   .card-slider-title {
     font-size: 1.75rem; /* Reduce font size for small devices */
   }
-  
+  .swiper-button-next,
+  .swiper-button-prev {
+    display: block;
+  }
 
   .card__description {
     font-size: 1rem; /* Reduce font size for small devices */
@@ -394,11 +402,11 @@ img {
   }
 
   .swiper-button-prev {
-    left: 10px;
+    left: -1rem;
   }
 
   .swiper-button-next {
-    right: 10px;
+    right: -1rem;
   }
 
   .card__description {
