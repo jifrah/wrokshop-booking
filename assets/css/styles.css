@@ -312,11 +312,11 @@ img {
 @media screen and (max-width: 768px) {
 
   .swiper-button-prev {
-    left: 1rem;
+    left: 3rem;
   }
 
   .swiper-button-next {
-    right: 1rem;
+    right: 3rem;
   }
   
   .card__container {
