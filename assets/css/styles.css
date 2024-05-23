@@ -230,31 +230,17 @@ img {
 }
 
 .card__description {
-  display: none; /* Hide the element by default */
   font-weight: 500;
   color: var(--second-color);
   margin-bottom: 1rem;
 }
 
-
-/* Show the description on hover or focus */
-.card__article:hover .card__description,
-.card__article:focus .card__description {
-  display: block;
-}
-
 .card__organisateur {
-  display: none; /* Hide the element by default */
   font-weight: 400;
   color: var(--second-color);
   margin-bottom: 1rem;
 }
 
-/* Show the description on hover or focus */
-.card__article:hover .card__organisateur,
-.card__article:focus .card__organisateur {
-  display: block;
-}
 
 /* Swiper class */
 .swiper-button-prev:after,
@@ -326,11 +312,11 @@ img {
 @media screen and (max-width: 768px) {
 
   .swiper-button-prev {
-    left: 3rem;
+    left: 1rem;
   }
 
   .swiper-button-next {
-    right: 3rem;
+    right: 1rem;
   }
   
   .card__container {
