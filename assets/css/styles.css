@@ -254,7 +254,7 @@ img {
   height: initial;
   font-size: 3rem;
   color: var(--second-color);
-  display: none;/
+  display: block;/
 }
 
 .swiper-button-prev {
