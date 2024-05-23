@@ -272,7 +272,7 @@ img {
   opacity: 1; /* Ensure buttons are visible */
   z-index: 10; /* Ensure buttons are above other elements */
   position: absolute; /* Ensure they are positioned absolutely */
-  top: 50%; /* Center vertically */
+  
   transform: translateY(-50%); /* Center vertically */
 }
 
