@@ -268,7 +268,7 @@ img {
   height: initial;
   font-size: 3rem;
   color: var(--second-color);
-  display: none;
+  display: block;
 }
 
 .swiper-button-prev {
@@ -324,15 +324,6 @@ img {
 /*=============== BREAKPOINTS ===============*/
 /* For small devices */
 @media screen and (max-width: 768px) {
-
-  .swiper-button-prev,
-  .swiper-button-next {
-    display: block; /* Ensure buttons are displayed */
-    width: 44px; /* Increase button size for better touch targets */
-    height: 44px; /* Increase button size for better touch targets */
-    opacity: 1; /* Ensure buttons are fully visible */
-    z-index: 10; /* Ensure buttons are above other elements */
-  }
 
   .swiper-button-prev {
     left: 3rem;
