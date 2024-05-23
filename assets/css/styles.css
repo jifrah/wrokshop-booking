@@ -324,13 +324,7 @@ img {
 /*=============== BREAKPOINTS ===============*/
 /* For small devices */
 @media screen and (max-width: 768px) {
-  .swiper-button-prev {
-    left: -1rem;
-  }
-
-  .swiper-button-next {
-    right: -1rem;
-  }
+  
   .card__container {
     max-height: calc(100vh - 60px); /* Adjust the height to avoid footer overlap */
     padding-top: 1rem;
@@ -392,10 +386,7 @@ img {
   .card-slider-title {
     font-size: 1.75rem; /* Reduce font size for small devices */
   }
-  .swiper-button-next,
-  .swiper-button-prev {
-    display: block;
-  }
+  
 
   .card__description {
     font-size: 1rem; /* Reduce font size for small devices */
