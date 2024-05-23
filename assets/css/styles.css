@@ -413,11 +413,11 @@ img {
   }
 
   .swiper-button-prev {
-    left: 1rem;
+    left: -1rem;
   }
 
   .swiper-button-next {
-    right: 1rem;
+    right: -1rem;
   }
 
   .card__description {
