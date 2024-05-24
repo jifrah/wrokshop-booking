@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const fetchDataAndInitializeSlider = (tableName, containerId) => {
         axios.get(`https://api.airtable.com/v0/${baseId}/${tableName}`, {
             headers: { Authorization: `Bearer ${apiKey}` },
-            params: { maxRecords: 20, view: 'Grid view' }
+            params: { maxRecords: 100, view: 'Grid view' }
         })
         .then(response => {
             const records = response.data.records;
@@ -24,6 +24,8 @@ document.addEventListener('DOMContentLoaded', function() {
         // Create a new card element
         var card = document.createElement('article');
         card.className = 'card__article swiper-slide';
+        card.setAttribute('data-record-id', recordId);
+        card.setAttribute('data-table-name', tableName);
     
         // Add card content
         card.innerHTML = `
@@ -55,36 +57,68 @@ document.addEventListener('DOMContentLoaded', function() {
     
         function updateButtonState() {
             if (participantCount >= 14) {
-                button.style.backgroundColor = 'red';
-                button.textContent = 'Complete';
+                button.style.backgroundColor = '#df1e26';
+                button.style.border = 'none';
+                button.textContent = 'Complet';
                 button.classList.add('disabled');
                 button.setAttribute('disabled', true);
             }
         }
     
         button.addEventListener('click', (event) => {
-            if (participantCount < 14) {
-                participantCount++;
-                participantCountElement.textContent = participantCount;
-    
-                // Update the participant count in Airtable
-                axios.patch(`https://api.airtable.com/v0/${baseId}/${tableName}/${recordId}`, {
-                    fields: {
-                        participants: participantCount
-                    }
-                }, {
-                    headers: { Authorization: `Bearer ${apiKey}` }
-                })
-                .then(() => {
-                    updateButtonState();
-                })
-                .catch(error => {
-                    console.error('Error updating participant count in Airtable:', error);
-                });
-            } else {
-                // Prevent the default action (navigation) if the count is 14 or more
-                event.preventDefault();
-            }
+            event.preventDefault(); // Prevent the default action
+
+            const modal = document.getElementById("validationModal");
+            const span = document.getElementsByClassName("close")[0];
+            const confirmButton = document.getElementById("confirmButton");
+            const cancelButton = document.getElementById("cancelButton");
+
+            const workshopName = card.querySelector('.card__name').innerText;
+            document.getElementById('modalTitle').innerText = `Inscription à l'Atelier ${workshopName}`;
+            document.getElementById('modalText').innerText = 'Je valide mon inscription à cet atelier.';
+
+            modal.style.display = "block";
+
+            confirmButton.onclick = function() {
+                modal.style.display = "none";
+                if (participantCount < 14) {
+                    participantCount++;
+                    participantCountElement.textContent = participantCount;
+
+                    // Update the participant count in Airtable
+                    axios.patch(`https://api.airtable.com/v0/${baseId}/${tableName}/${recordId}`, {
+                        fields: {
+                            participants: participantCount
+                        }
+                    }, {
+                        headers: { Authorization: `Bearer ${apiKey}` }
+                    })
+                    .then(() => {
+                        updateButtonState();
+                        // Navigate to the link
+                        window.location.href = button.href;
+                    })
+                    .catch(error => {
+                        console.error('Error updating participant count in Airtable:', error);
+                    });
+                } else {
+                    alert('Le nombre maximum de participants a été atteint.');
+                }
+            };
+
+            cancelButton.onclick = function() {
+                modal.style.display = "none";
+            };
+
+            span.onclick = function() {
+                modal.style.display = "none";
+            };
+
+            window.onclick = function(event) {
+                if (event.target == modal) {
+                    modal.style.display = "none";
+                }
+            };
         });
     
         updateButtonState();

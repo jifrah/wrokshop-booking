@@ -1,19 +1,19 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <!-- Open Graph meta tags -->
+     <meta property="og:title" content="Inscription aux Ateliers">
+     <meta property="og:description" content="Inscription aux ateliers pour le séminaire DT et DTA.">
+     <meta property="og:image" content="https://www.adie.org/assets/images/logo.svg">
+     <meta property="og:url" content="https://jifrah.github.io/wrokshop-booking">
+     <meta property="og:type" content="website">
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/3.5.0/remixicon.css" crossorigin="">
     <link rel="stylesheet" href="assets/css/swiper-bundle.min.css">
     <link rel="stylesheet" href="assets/css/styles.css">
     <title>Inscription aux Ateliers</title>
-      <!-- Open Graph meta tags -->
-    <meta property="og:title" content="Inscription aux Ateliers">
-    <meta property="og:description" content="Inscription aux ateliers pour le séminaire DT et DTA.">
-    <meta property="og:image" content="https://www.adie.org/assets/images/logo.svg">
-    <meta property="og:url" content="https://jifrah.github.io/wrokshop-booking">
-    <meta property="og:type" content="website">
 </head>
 <body>
     <header class="header">
@@ -26,7 +26,7 @@
     </header>
 
     <div class="title-container">
-        <h1 class="card-slider-title">Jeudi 30 Mai - 9h30-10h30</h1>
+        <h1 class="card-slider-title">Jeudi 30 Mai - 9h00-10h00</h1>
     </div>
     <section class="container">
         <div class="card__container swiper" id="slider1">
@@ -46,7 +46,7 @@
     </section>
 
     <div class="title-container">
-        <h1 class="card-slider-title">Jeudi 30 Mai - 10h30-11h00</h1>
+        <h1 class="card-slider-title">Jeudi 30 Mai - 10h30-11h30</h1>
     </div>
     <section class="container">
         <div class="card__container swiper" id="slider2">
@@ -66,7 +66,7 @@
     </section>
 
     <div class="title-container">
-        <h1 class="card-slider-title">Jeudi 30 Mai - 11h15-11h45</h1>
+        <h1 class="card-slider-title">Jeudi 30 Mai - 12h00-13h00</h1>
     </div>
     <section class="container">
         <div class="card__container swiper" id="slider3">
@@ -86,7 +86,7 @@
     </section>
 
     <div class="title-container">
-        <h1 class="card-slider-title">Jeudi 30 Mai - 11h45-12h45</h1>
+        <h1 class="card-slider-title">Jeudi 30 Mai - 13h30-14h30</h1>
     </div>
     <section class="container">
         <div class="card__container swiper" id="slider4">
@@ -109,7 +109,22 @@
         <img src="https://images.ctfassets.net/ef04tndlnzev/5HaFMOBRgb27Awp9IuirrI/96fbde5c114a9c429cdf88d220ccc6a1/Logo_UE.svg" alt="Logo UE">
         <img src="https://upload.wikimedia.org/wikipedia/fr/3/38/Logo_de_la_R%C3%A9publique_fran%C3%A7aise_%281999%29.svg" alt="Logo de la République Française">
         <img src="https://i1.wp.com/hallucine.com/wp-content/uploads/2021/02/logo-bpifrance-le-hub-yellow-hd.png?fit=959%2C972&ssl=1" alt="Logo BPI France">
+        <img src="https://www.adie.org/assets/images/logo.svg" alt="Logo Adie">
     </section>
+
+    <!-- Modal Structure -->
+    <div id="validationModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2 id="modalTitle">Inscription à l'Atelier</h2>
+            <p id="modalText">Je valide mon inscription à cet atelier</p>
+            <div class="modal-actions">
+                <button id="cancelButton" class="modal-button cancel">Non</button>
+                <button id="confirmButton" class="modal-button confirm">Oui</button>
+            </div>
+        </div>
+    </div>
+
     <script src="assets/js/swiper-bundle.min.js"></script>
     <script src="assets/js/page3.js"></script>
 </body>

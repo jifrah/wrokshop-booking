@@ -39,7 +39,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     <img src="assets/img/location.png" alt="Location Icon" class="location-icon">
                     ${fields.location}
                 </p>
-                <p class="card__participant">Participants : <span class="participant-count">${fields.participants}</span>/14
+                <p class="card__participant">Participants : <span class="participant-count">${fields.participants}</span>/15
                 </p>
                 <a href="${fields.link}" class="card__button">S'inscrire</a>
                 <p class="card__description">${fields.description}</p>
@@ -150,11 +150,8 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     };
 
-    // Fetch data and initialize sliders
-    fetchDataAndInitializeSlider('j2_creneau_1', 'slider1');
-    fetchDataAndInitializeSlider('j2_creneau_2', 'slider2');
-    fetchDataAndInitializeSlider('j2_creneau_3', 'slider3');
-    fetchDataAndInitializeSlider('j2_creneau_4', 'slider4');
+    // Fetch data and initialize slider
+    fetchDataAndInitializeSlider('j2_creneau_5', 'slider1');
 
     // Toggle card description on touch-enabled devices
     document.querySelectorAll('.card__article').forEach((card) => {

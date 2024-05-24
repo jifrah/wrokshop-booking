@@ -17,8 +17,10 @@
   /*========== Font and typography ==========*/
   /*.5rem = 8px | 1rem = 16px ...*/
   --body-font: "Montserrat", sans-serif;
-  --h2-font-size: 1.25rem;
+  --h2-font-size: 1rem;
   --normal-font-size: 1rem;
+  --modal-title-size: 1.2rem;
+  --modal-title-weight: 700;
 }
 
 /*=============== LINKS ===============*/
@@ -122,7 +124,6 @@ img {
   max-height: 50px;
 }
 
-
 /*=============== CARD ===============*/
 .container {
   display: flex;
@@ -193,7 +194,7 @@ img {
 
 .card__location {
   font-weight: 500;
-  color: var(--second-color);
+  color: #383d3f !important;
   margin-bottom: 1.75rem;
   display: flex;
   align-items: center; /* Align icon and text vertically */
@@ -223,6 +224,7 @@ img {
   font-weight: 600;
   box-sizing: border-box; /* Ensure padding and border are included in width/height */
   margin-bottom: 1rem;
+  transition: background-color 0.3s ease;
 }
 
 .card__button:hover {
@@ -235,7 +237,6 @@ img {
   color: var(--second-color);
   margin-bottom: 1rem;
 }
-
 
 /* Show the description on hover or focus */
 .card__article:hover .card__description,
@@ -320,6 +321,98 @@ img {
   font-weight: 500;
 }
 
+/*=============== MODAL ===============*/
+/* Modal CSS */
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+.modal-content {
+  background-color: #fefefe;
+  margin: 15% auto; /* 15% from the top and centered */
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%; /* Could be more or less, depending on screen size */
+  max-width: 600px;
+  border-radius: 10px;
+  text-align: center;
+  font-family: var(--body-font);
+}
+
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.modal h2 {
+  font-size: var(--modal-title-size);
+  font-weight: var(--modal-title-weight);
+  color: var(--dark-color);
+  margin-bottom: 20px;
+  margin-top: 20px ;
+}
+
+.modal p {
+  font-size: 18px;
+  color: var(--dark-color);
+  margin-bottom: 20px;
+}
+
+.modal-actions {
+  display: flex;
+  justify-content: space-between; /* Align buttons to the left and right */
+}
+
+.modal-button {
+  padding: 0.75rem 1.5rem;
+  border: 0.1rem solid var(--first-color);
+  border-radius: 2rem;
+  font-size: 16px;
+  font-weight: 600;
+  box-sizing: border-box;
+  cursor: pointer;
+  transition: background-color 0.3s ease, border 0.3s ease;
+}
+
+.modal-button.confirm {
+  background-color: white;
+  color: var(--dark-color);
+  margin-right: 10px;
+}
+
+.modal-button.confirm:hover {
+  background-color: var(--first-color);
+}
+
+.modal-button.cancel {
+  background-color: transparent;
+  color: #D3D3D3;
+  border: none;
+  margin-left: 10px;
+}
+
+.modal-button.cancel:hover {
+  background-color: var(--body-color);
+  border: none;
+}
 
 /*=============== BREAKPOINTS ===============*/
 /* For small devices */
@@ -328,6 +421,11 @@ img {
     max-height: calc(100vh - 60px); /* Adjust the height to avoid footer overlap */
     padding-top: 1rem;
     margin-bottom: 1rem; /* Increase space between the card slider and the footer */
+  }
+
+  .swiper-button-next,
+  .swiper-button-prev {
+    display: block;
   }
 
   .header__img {
@@ -362,6 +460,11 @@ img {
     padding: 0.5rem 1rem; /* Adjust padding as needed */
   }
 
+  .card__description,
+  .card__organisateur {
+    display: block;
+  }
+
   .card__description {
     font-size: 0.8rem; /* Reduce font size for small devices */
   }
@@ -372,7 +475,7 @@ img {
 }
 
 /* For medium devices */
-@media screen and (min-width: 768px) {
+@media screen and (min-width: 768px) and (max-width: 1120px) {
   .card__content {
     margin-inline: 3rem;
   }
@@ -390,7 +493,9 @@ img {
     display: block;
   }
 
-  .card__description {
+  .card__description,
+  .card__organisateur {
+    display: block;
     font-size: 1rem; /* Reduce font size for small devices */
   }
 }
@@ -419,5 +524,10 @@ img {
 
   .card__location {
     font-size: 1.25rem; /* Increase font size for large devices */
+  }
+
+  .swiper-button-next,
+  .swiper-button-prev {
+    display: block;
   }
 }
