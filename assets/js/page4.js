@@ -14,6 +14,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 addCardToSlider(record.fields, record.id, containerId, tableName);
             });
             initializeSwiper(containerId);
+            setLinksToOpenInNewTab();
         })
         .catch(error => {
             console.error('Error fetching data from Airtable:', error);
@@ -56,7 +57,7 @@ document.addEventListener('DOMContentLoaded', function() {
         let participantCount = parseInt(participantCountElement.textContent, 10);
     
         function updateButtonState() {
-            if (participantCount >= 14) {
+            if (participantCount >= 15) {
                 button.style.backgroundColor = '#df1e26';
                 button.style.border = 'none';
                 button.textContent = 'Complet';
@@ -81,7 +82,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
             confirmButton.onclick = function() {
                 modal.style.display = "none";
-                if (participantCount < 14) {
+                if (participantCount < 15) {
                     participantCount++;
                     participantCountElement.textContent = participantCount;
 
@@ -150,6 +151,17 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     };
 
+    const setLinksToOpenInNewTab = () => {
+        // Get all anchor elements
+        var links = document.getElementsByTagName('a');
+
+        // Loop through all anchor elements
+        for (var i = 0; i < links.length; i++) {
+            // Set the target attribute to _blank
+            links[i].setAttribute('target', '_blank');
+        }
+    };
+
     // Fetch data and initialize slider
     fetchDataAndInitializeSlider('j2_creneau_5', 'slider1');
 
@@ -163,4 +175,7 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     });
+
+    // Ensure all links open in a new tab
+    setLinksToOpenInNewTab();
 });

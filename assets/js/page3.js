@@ -14,6 +14,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 addCardToSlider(record.fields, record.id, containerId, tableName);
             });
             initializeSwiper(containerId);
+            setLinksToOpenInNewTab();
         })
         .catch(error => {
             console.error('Error fetching data from Airtable:', error);
@@ -150,6 +151,17 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     };
 
+    const setLinksToOpenInNewTab = () => {
+        // Get all anchor elements
+        var links = document.getElementsByTagName('a');
+
+        // Loop through all anchor elements
+        for (var i = 0; i < links.length; i++) {
+            // Set the target attribute to _blank
+            links[i].setAttribute('target', '_blank');
+        }
+    };
+
     // Fetch data and initialize sliders
     fetchDataAndInitializeSlider('j2_creneau_1', 'slider1');
     fetchDataAndInitializeSlider('j2_creneau_2', 'slider2');
@@ -166,4 +178,7 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     });
+
+    // Ensure all links open in a new tab
+    setLinksToOpenInNewTab();
 });
