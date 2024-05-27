@@ -14,6 +14,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 addCardToSlider(record.fields, record.id, containerId, tableName);
             });
             initializeSwiper(containerId);
+            setLinksToOpenInNewTab();
         })
         .catch(error => {
             console.error('Error fetching data from Airtable:', error);
@@ -41,7 +42,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 </p>
                 <p class="card__participant">Participants : <span class="participant-count">${fields.participants}</span>/14
                 </p>
-                <a href="${fields.link}" target="_blank" class="card__button">S'inscrire</a>
+                <a href="${fields.link}" class="card__button">S'inscrire</a>
                 <p class="card__description">${fields.description}</p>
                 <p class="card__organisateur"><b><u>Animateurs :</b></u> <i>${fields.animateurs}</i></p>
             </div>
@@ -95,8 +96,8 @@ document.addEventListener('DOMContentLoaded', function() {
                     })
                     .then(() => {
                         updateButtonState();
-                        // Open the link in a new tab
-                        window.open(button.href, '_blank');
+                        // Navigate to the link
+                        window.location.href = button.href;
                     })
                     .catch(error => {
                         console.error('Error updating participant count in Airtable:', error);
@@ -150,6 +151,17 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     };
 
+    const setLinksToOpenInNewTab = () => {
+        // Get all anchor elements
+        var links = document.getElementsByTagName('a');
+
+        // Loop through all anchor elements
+        for (var i = 0; i < links.length; i++) {
+            // Set the target attribute to _blank
+            links[i].setAttribute('target', '_blank');
+        }
+    };
+
     // Fetch data and initialize sliders
     fetchDataAndInitializeSlider('j1_creneau_1', 'slider1');
     fetchDataAndInitializeSlider('j1_creneau_2', 'slider2');
@@ -164,4 +176,7 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     });
+
+    // Ensure all links open in a new tab
+    setLinksToOpenInNewTab();
 });
