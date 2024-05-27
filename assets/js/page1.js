@@ -41,7 +41,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 </p>
                 <p class="card__participant">Participants : <span class="participant-count">${fields.participants}</span>/14
                 </p>
-                <a href="javascript:void(0);" class="card__button">S'inscrire</a>
+                <a href="${fields.link}" class="card__button">S'inscrire</a>
                 <p class="card__description">${fields.description}</p>
                 <p class="card__organisateur"><b><u>Animateurs :</b></u> <i>${fields.animateurs}</i></p>
             </div>
@@ -63,16 +63,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 button.classList.add('disabled');
                 button.setAttribute('disabled', true);
             }
-        }
-
-        function openInBrowser(url) {
-            const link = document.createElement('a');
-            link.href = url;
-            link.target = '_blank';
-            link.rel = 'noopener noreferrer';
-            document.body.appendChild(link);
-            link.click();
-            document.body.removeChild(link);
         }
     
         button.addEventListener('click', (event) => {
@@ -105,8 +95,8 @@ document.addEventListener('DOMContentLoaded', function() {
                     })
                     .then(() => {
                         updateButtonState();
-                        // Open the link in a new tab using the openInBrowser function
-                        openInBrowser(fields.link);
+                        // Navigate to the link
+                        window.location.href = button.href;
                     })
                     .catch(error => {
                         console.error('Error updating participant count in Airtable:', error);
