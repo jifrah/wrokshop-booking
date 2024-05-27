@@ -41,7 +41,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 </p>
                 <p class="card__participant">Participants : <span class="participant-count">${fields.participants}</span>/14
                 </p>
-                <a href="${fields.link}" class="card__button">S'inscrire</a>
+                <a href="${fields.link}" class="card__button" target=”_blank”>S'inscrire</a>
                 <p class="card__description">${fields.description}</p>
                 <p class="card__organisateur"><b><u>Animateurs :</b></u> <i>${fields.animateurs}</i></p>
             </div>
@@ -95,8 +95,8 @@ document.addEventListener('DOMContentLoaded', function() {
                     })
                     .then(() => {
                         updateButtonState();
-                        // Navigate to the link in a new tab
-                        window.open(button.href, '_blank');
+                        // Navigate to the link
+                        window.location.href = button.href;
                     })
                     .catch(error => {
                         console.error('Error updating participant count in Airtable:', error);
