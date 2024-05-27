@@ -66,9 +66,11 @@ document.addEventListener('DOMContentLoaded', function() {
         }
 
         function openInBrowser(url) {
-            if (confirm('Open in web browser? This may require you to log in to Google.')) {
-                window.open(url, '_blank');
-            }
+            const link = document.createElement('a');
+            link.href = url;
+            link.target = '_blank';
+            link.rel = 'noopener noreferrer';
+            link.click();
         }
     
         button.addEventListener('click', (event) => {
