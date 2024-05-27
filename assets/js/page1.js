@@ -41,7 +41,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 </p>
                 <p class="card__participant">Participants : <span class="participant-count">${fields.participants}</span>/14
                 </p>
-                <a href="${fields.link}" class="card__button">S'inscrire</a>
+                <a href="${fields.link}" target="_blank" class="card__button">S'inscrire</a>
                 <p class="card__description">${fields.description}</p>
                 <p class="card__organisateur"><b><u>Animateurs :</b></u> <i>${fields.animateurs}</i></p>
             </div>
