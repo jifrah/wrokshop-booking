@@ -95,8 +95,8 @@ document.addEventListener('DOMContentLoaded', function() {
                     })
                     .then(() => {
                         updateButtonState();
-                        // Navigate to the link
-                        window.location.href = button.href;
+                        // Navigate to the link in a new tab
+                        window.open(button.href, '_blank');
                     })
                     .catch(error => {
                         console.error('Error updating participant count in Airtable:', error);
