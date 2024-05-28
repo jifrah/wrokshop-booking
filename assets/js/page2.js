@@ -40,7 +40,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     <img src="assets/img/location.png" alt="Location Icon" class="location-icon">
                     ${fields.location}
                 </p>
-                <p class="card__participant">Participants : <span class="participant-count">${fields.participants}</span>/14
+                <p class="card__participant">Participants : <span class="participant-count">${fields.participants}</span>/12
                 </p>
                 <a href="${fields.link}" class="card__button">S'inscrire</a>
                 <p class="card__description">${fields.description}</p>
@@ -57,7 +57,7 @@ document.addEventListener('DOMContentLoaded', function() {
         let participantCount = parseInt(participantCountElement.textContent, 10);
     
         function updateButtonState() {
-            if (participantCount >= 14) {
+            if (participantCount >= 12) {
                 button.style.backgroundColor = '#df1e26';
                 button.style.border = 'none';
                 button.textContent = 'Complet';
@@ -82,7 +82,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
             confirmButton.onclick = function() {
                 modal.style.display = "none";
-                if (participantCount < 14) {
+                if (participantCount < 12) {
                     participantCount++;
                     participantCountElement.textContent = participantCount;
 
