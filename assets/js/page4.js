@@ -15,6 +15,7 @@ document.addEventListener('DOMContentLoaded', function() {
             });
             initializeSwiper(containerId);
             setLinksToOpenInNewTab();
+            startPolling(tableName, containerId); // Start polling for updates
         })
         .catch(error => {
             console.error('Error fetching data from Airtable:', error);
@@ -63,6 +64,12 @@ document.addEventListener('DOMContentLoaded', function() {
                 button.textContent = 'Complet';
                 button.classList.add('disabled');
                 button.setAttribute('disabled', true);
+            } else {
+                button.style.backgroundColor = '';
+                button.style.border = '';
+                button.textContent = "S'inscrire";
+                button.classList.remove('disabled');
+                button.removeAttribute('disabled');
             }
         }
     
@@ -85,6 +92,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 if (participantCount < 15) {
                     participantCount++;
                     participantCountElement.textContent = participantCount;
+                    updateButtonState();
 
                     // Update the participant count in Airtable
                     axios.patch(`https://api.airtable.com/v0/${baseId}/${tableName}/${recordId}`, {
@@ -95,12 +103,15 @@ document.addEventListener('DOMContentLoaded', function() {
                         headers: { Authorization: `Bearer ${apiKey}` }
                     })
                     .then(() => {
-                        updateButtonState();
                         // Navigate to the link
                         window.location.href = button.href;
                     })
                     .catch(error => {
                         console.error('Error updating participant count in Airtable:', error);
+                        // Revert the UI update if the backend update fails
+                        participantCount--;
+                        participantCountElement.textContent = participantCount;
+                        updateButtonState();
                     });
                 } else {
                     alert('Le nombre maximum de participants a été atteint.');
@@ -124,7 +135,7 @@ document.addEventListener('DOMContentLoaded', function() {
     
         updateButtonState();
     };
-    
+
     const initializeSwiper = (containerId) => {
         // Initialize Swiper after adding cards to the DOM
         let swiperCards = new Swiper(`#${containerId} .card__content`, {
@@ -160,6 +171,50 @@ document.addEventListener('DOMContentLoaded', function() {
             // Set the target attribute to _blank
             links[i].setAttribute('target', '_blank');
         }
+    };
+
+    // Function to poll server for updates
+    const pollServerForUpdates = (tableName, containerId) => {
+        axios.get(`https://api.airtable.com/v0/${baseId}/${tableName}`, {
+            headers: { Authorization: `Bearer ${apiKey}` },
+            params: { maxRecords: 100, view: 'Grid view' }
+        })
+        .then(response => {
+            const records = response.data.records;
+            records.forEach(record => {
+                const card = document.querySelector(`.card__article[data-record-id="${record.id}"]`);
+                if (card) {
+                    const participantCountElement = card.querySelector('.participant-count');
+                    const newParticipantCount = record.fields.participants;
+                    participantCountElement.textContent = newParticipantCount;
+
+                    const button = card.querySelector('.card__button');
+                    if (newParticipantCount >= 15) {
+                        button.style.backgroundColor = '#df1e26';
+                        button.style.border = 'none';
+                        button.textContent = 'Complet';
+                        button.classList.add('disabled');
+                        button.setAttribute('disabled', true);
+                    } else {
+                        button.style.backgroundColor = '';
+                        button.style.border = '';
+                        button.textContent = "S'inscrire";
+                        button.classList.remove('disabled');
+                        button.removeAttribute('disabled');
+                    }
+                }
+            });
+        })
+        .catch(error => {
+            console.error('Error polling data from Airtable:', error);
+        });
+    };
+
+    // Start polling at regular intervals
+    const startPolling = (tableName, containerId) => {
+        setInterval(() => {
+            pollServerForUpdates(tableName, containerId);
+        }, 5000); // Poll every 5 seconds
     };
 
     // Fetch data and initialize slider
