@@ -27,7 +27,7 @@ document.addEventListener('DOMContentLoaded', function() {
         card.className = 'card__article swiper-slide';
         card.setAttribute('data-record-id', recordId);
         card.setAttribute('data-table-name', tableName);
-    
+
         // Add card content
         card.innerHTML = `
             <div class="card__image">
@@ -47,15 +47,15 @@ document.addEventListener('DOMContentLoaded', function() {
                 <p class="card__organisateur"><b><u>Animateurs :</b></u> <i>${fields.animateurs}</i></p>
             </div>
         `;
-    
+
         // Append the card to the swiper wrapper
         document.querySelector(`#${containerId} .swiper-wrapper`).appendChild(card);
-    
+
         // Handle the S'inscrire button click event
         const button = card.querySelector('.card__button');
         const participantCountElement = card.querySelector('.participant-count');
         let participantCount = parseInt(participantCountElement.textContent, 10);
-    
+
         function updateButtonState() {
             if (participantCount >= 12) {
                 button.style.backgroundColor = '#df1e26';
@@ -65,7 +65,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 button.setAttribute('disabled', true);
             }
         }
-    
+
         button.addEventListener('click', (event) => {
             event.preventDefault(); // Prevent the default action
 
@@ -85,6 +85,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 if (participantCount < 12) {
                     participantCount++;
                     participantCountElement.textContent = participantCount;
+                    updateButtonState();
 
                     // Update the participant count in Airtable
                     axios.patch(`https://api.airtable.com/v0/${baseId}/${tableName}/${recordId}`, {
@@ -95,12 +96,15 @@ document.addEventListener('DOMContentLoaded', function() {
                         headers: { Authorization: `Bearer ${apiKey}` }
                     })
                     .then(() => {
-                        updateButtonState();
                         // Navigate to the link
                         window.location.href = button.href;
                     })
                     .catch(error => {
                         console.error('Error updating participant count in Airtable:', error);
+                        // Revert the UI update if the backend update fails
+                        participantCount--;
+                        participantCountElement.textContent = participantCount;
+                        updateButtonState();
                     });
                 } else {
                     alert('Le nombre maximum de participants a été atteint.');
@@ -121,10 +125,10 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
             };
         });
-    
+
         updateButtonState();
     };
-    
+
     const initializeSwiper = (containerId) => {
         // Initialize Swiper after adding cards to the DOM
         let swiperCards = new Swiper(`#${containerId} .card__content`, {
